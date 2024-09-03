@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data in Google Sheets</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header, .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .header i, .footer i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 24px;
+        }
+
+        .header i {
+            left: 10px;
+        }
+
+        .footer i {
+            right: 10px;
+        }
+
+        .header h4, .footer h4 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card span {
+            font-size: 15px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            border: 1px solid black;
+        }
+
+        .form-control:focus {
+            border-color: #0056b3;
+            box-shadow: none;
+        }
+
+        .btn-primary, .btn-danger {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover, .btn-danger:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="container">
+        <div class="card-header bg-primary mb-3 text-white text-center position-relative">
+            <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h4>वॉर्डची माहितीत बदल </h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+        <div class="form-group">
+            <label for="wardSelector">वॉर्ड क्रमांक शोधा :</label>
+            <select class="form-control" id="wardSelector">
+                <option value="">वॉर्ड क्रमांक </option>
+                <!-- Options will be populated dynamically -->
+            </select>
+        </div>
+        <form id="editForm">
+            <div class="form-group">
+                <label for="wardno">वॉर्ड क्रमांक:</label>
+                <input type="text" class="form-control" id="wardno" readonly>
+            </div>
+            <div class="form-group">
+                <label for="date">दिनांक:</label>
+                <input type="text" class="form-control" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">वेळ:</label>
+                <input type="text" class="form-control" id="time" required>
+            </div>
+            <div class="form-group">
+                <label for="day">वार:</label>
+                <input type="text" class="form-control" id="day" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="deleteData()">Delete</button>
+        </form>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzX5NesuqoXtjHzfAMze_8SW0d1u6ZuFW5pu0seOSvt5nSpVR7QL5O_0kZpHm5FxHCzpQ/exec';
+
+        $(document).ready(function() {
+            // Populate ward numbers in selector
+            fetch(scriptURL + '?action=getWardNumbers')
+                .then(response => response.json())
+                .then(data => {
+                    const wardSelector = document.getElementById('wardSelector');
+                    data.forEach(ward => {
+                        const option = document.createElement('option');
+                        option.value = ward;
+                        option.textContent = ward;
+                        wardSelector.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching ward numbers:', error));
+
+            // Handle ward number selection change
+            $('#wardSelector').change(function() {
+                const wardNumber = $(this).val();
+                fetch(scriptURL + `?action=getData&wardno=${wardNumber}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            const rowData = data[0]; // Assuming only one row for simplicity
+                            $('#wardno').val(rowData[0]);
+                            $('#date').val(rowData[1]);
+                            $('#time').val(rowData[2]);
+                            $('#day').val(rowData[3]);
+                        } else {
+                            resetForm();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                        resetForm();
+                    });
+            });
+
+            // Handle form submission for update
+            $('#editForm').submit(function(e) {
+                e.preventDefault();
+                const wardno = $('#wardno').val();
+                const date = $('#date').val();
+                const time = $('#time').val();
+                const day = $('#day').val();
+
+                fetch(scriptURL + `?action=updateData&wardno=${wardno}&date=${date}&time=${time}&day=${day}`, { method: 'POST' })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert('Data updated successfully.');
+                        resetForm();
+                    })
+                    .catch(error => console.error('Error updating data:', error));
+            });
+        });
+
+        // Function to delete data
+        function deleteData() {
+            const wardno = $('#wardno').val();
+            if (!wardno) {
+                alert('Please select a ward number to delete data.');
+                return;
+            }
+
+            if (confirm('Are you sure you want to delete this data?')) {
+                fetch(scriptURL + `?action=deleteData&wardno=${wardno}`, { method: 'DELETE' })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert('Data deleted successfully.');
+                        resetForm();
+                    })
+                    .catch(error => console.error('Error deleting data:', error));
+            }
+        }
+
+        // Function to reset form fields
+        function resetForm() {
+            $('#wardno').val('');
+            $('#date').val('');
+            $('#time').val('');
+            $('#day').val('');
+            $('#wardSelector').val('');
+        }
+    </script>
+</body>
+</html>

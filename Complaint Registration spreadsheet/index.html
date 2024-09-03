@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Registration Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            /* font-family: 'Arial, sans-serif'; */
+            font-family: 'Mukta', sans-serif;
+
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header,
+        .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .header i,
+        .footer i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 24px;
+        }
+
+        .header i {
+            left: 10px;
+        }
+
+        .footer i {
+            right: 10px;
+        }
+
+        .header h4,
+        .footer h4 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons button[type="reset"] {
+            background-color: #6c757d;
+        }
+
+        .buttons button[type="reset"]:hover {
+            background-color: #5a6268;
+        }
+
+        footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center;
+            color: #666;
+            clear: both;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+		<div class="card-header bg-primary text-white text-center position-relative mb-3">
+            <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h4>तक्रार नोंदणी</h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+
+        <!-- Form Section -->
+        <form id="complaint-form"
+            action="https://script.google.com/macros/s/AKfycbzunR09kdcHMLSuCfU2DFEI_36bQj3j9wpIYELn0FBdVDOrkMGTFs6ElzdotxfbgJcNhg/exec"
+            method="post">
+            <div class="form-group">
+                <label for="name">Name (नाव):</label>
+                <input type="text" id="uname" name="uname" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile-number">Mobile Number (मोबाईल क्रमांक):</label>
+                <input type="tel" id="mobile_number" name="mobile_number" maxlength="10" required>
+            </div>
+            <div class="form-group">
+                <label for="complaint">Complaint (तक्रार):</label>
+                <textarea id="complaint" name="complaint" required></textarea>
+            </div>
+
+            <!-- Button Section -->
+            <div class="buttons">
+                <button type="submit" id="clickButton">SUBMIT</button>
+                <button type="reset" id="clearButton">CLEAR</button>
+            </div>
+        </form>
+
+        <!-- Footer Section -->
+       
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('complaint-form');
+            const formData = new FormData(form);
+            const params = new URLSearchParams();
+
+            for (const pair of formData.entries()) {
+                params.append(pair[0], pair[1]);
+            }
+
+            console.log('Submitting form with params:', params.toString());
+
+            fetch('https://script.google.com/macros/s/AKfycbzunR09kdcHMLSuCfU2DFEI_36bQj3j9wpIYELn0FBdVDOrkMGTFs6ElzdotxfbgJcNhg/exec', {
+                method: 'POST',
+                body: params
+            }).then(response => response.text())
+                .then(data => {
+                    console.log('Response from server:', data);
+                    if (data.trim() === 'Data Saved Successfully!') {
+                        const queryString = params.toString();
+                        console.log('Redirecting to:', './display.html?' + queryString);
+                        window.location.href = './display.html?' + queryString;
+                    } else {
+                        console.log('Error response from server:', data);
+                        alert('Error submitting form');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Error submitting form');
+                });
+        }
+    </script>
+</body>
+
+</html>

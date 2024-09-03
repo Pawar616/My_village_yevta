@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Data to Google Sheets</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        .form-control {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card-header mb-2 pt-3 bg-primary text-white text-center position-relative">
+            <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h4 class="">लाभार्थी</h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+        <form id="addForm">
+            <div class="form-group">
+                <label for="work">नाव</label>
+                <input type="text" class="form-control" id="work" name="work" required>
+            </div>
+            <div class="form-group">
+                <label for="Scheme">योजना:</label>
+                <input type="text" class="form-control" id="Scheme" name="Scheme" required>
+            </div>
+            <div class="form-group">
+                <label for="amt">निधी:</label>
+                <input type="text" class="form-control" id="amt" name="amt" required>
+            </div>
+            <div class="form-group">   
+                <label for="date">दिनांक</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyAEO5XsjFRuIqH2wVr_ex-i8zBDvzjhSSUOP9V2tbNffJ7ys-gjNC4d2SpFwiE-OANvg/exec';
+        $(document).ready(function() {
+            $('#addForm').submit(function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch(scriptURL, {
+                    method: 'POST',
+                    body: new URLSearchParams(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Success') {
+                        alert('Data saved successfully.');
+                        window.location.href = 'display.html'; // Redirect to desired page
+                    } else {
+                        alert('Error saving data: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error saving data: ' + error.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

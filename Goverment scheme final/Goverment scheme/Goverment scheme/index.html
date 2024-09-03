@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <title>सरकारी योजना</title>
+    <style>
+      body {
+        /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
+        font-family: 'Mukta', sans-serif;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa; /* Light gray background */
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header {
+        text-align: center;
+        background: #007bff; /* Blue background */
+        color: #fff;
+        padding: 10px;
+        width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      header h1 {
+        font-size: 24px;
+        margin: 0;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        background-color: #ffffff; /* White background */
+        border: 1px solid #ccc;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .big-button {
+        padding: 20px;
+        font-size: 16px;
+        border: none;
+        width: 100%;
+        max-width: 400px;
+        border-radius: 12px;
+        background: #007bff; /* Blue background */
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin: 0 auto;
+      }
+
+      .big-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .big-button:active {
+        transform: translateY(1px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .big-button:focus {
+        outline: none;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #777;
+      }
+
+      .modal-body {
+        max-height: 500px;
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .modal-footer {
+        border-top: none;
+        padding: 20px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .ok-button {
+        background-color: #007bff; /* Blue background */
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, box-shadow 0.3s;
+      }
+
+      .ok-button:hover {
+        background-color: #0056b3; /* Darker blue */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .ok-button:active {
+        background-color: #004494; /* Even darker blue */
+      }
+
+      table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+      }
+
+      th {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 2px solid #dee2e6;
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+      }
+
+      thead {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      tbody tr:hover {
+        background-color: #e9ecef;
+      }
+      .card-header{
+        border-bottom: none;
+      }
+
+      @media (max-width: 600px) {
+        .button-container {
+          padding: 10px;
+        }
+
+        .big-button {
+          padding: 15px;
+          font-size: 14px;
+        }
+
+        header h1 {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          class="card-header bg-primary text-white text-center position-relative"
+        >
+          <a class="text-white" href="../../index.html"
+            ><i
+              class="material-icons position-absolute"
+              style="left: 10px; top: 50%; transform: translateY(-50%)"
+              >arrow_back</i
+            ></a
+          >
+          <h4>सरकारी योजना</h4>
+          <i
+            class="material-icons position-absolute"
+            style="right: 10px; top: 50%; transform: translateY(-50%)"
+            >person</i
+          >
+        </div>
+      </header>
+      <div class="button-container">
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content1" > बाल संगोपन योजना कागदपत्र </button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content2">महाराष्ट्र बेरोजगारी भत्ता योजना </button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content3">लाडकी बहिण योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content4">लेक लाडकी योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content5">महिला बालकल्याण योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content6">माझी कन्या भाग्यश्री योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content7">श्रवण बाळ योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content8">महात्मा ज्योतिबा फुले कर्ज माफी योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content9">आम आदमी विमा योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content10">लाडका भाऊ योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content11">महात्मा ज्योतिबा फुले जन आरोग्य योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content12">मुख्यमंत्री कृषी व अन्न प्रक्रिया योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content13">महास्वयम् रोजगार नोंदणी</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content14">मुख्यमंत्री सौर कृषी पंप योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content15">नानाजी देशमुख कृषी संजीवनी योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content16">डॉ. पंजाबराव देशमुख वसतिगृह निर्वाह भत्ता योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content17">रमाई आवास योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content18">मागेल त्याला शेततळे योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content19">सोलर रूफटॉप योजना</button>
+        <button class="big-button" data-toggle="modal" data-target="#myModal" data-content="content20">सुकन्या समृद्धी योजना</button>
+
+        <!-- Add more buttons as needed -->
+      </div>
+      <footer>
+        <h5>&copy; Digispect Technologies</h5>
+      </footer>
+    </div>
+
+    <!-- Bootstrap Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center  " id="myModalLabel">आवश्यक कागदपत्र </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body-content">
+            <!-- Content will be loaded here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="ok-button" data-dismiss="modal">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      const tableData = {
+// Updated content1 with IDs
+ content1: [
+    { id: 1, document: "अर्जदाराने निवासाचा पुरावा सादर करणे आवश्यक आहे. (रेशन कार्ड, वीज बिल, पाणी बिल, घराचे टायटल, महापालिका प्रमाणपत्र/नगरसेवक प्रमाणपत्र)" },
+    { id: 2, document: "उत्पन्नाचा पुरावा किंवा पालकांच्या पगाराची पावती (तहसीलदाराच्या उत्पन्नाच्या दाखल्याऐवजी, उत्पन्नाचे इतर पुरावे देखील स्वीकारले जातील. उदा. पे स्लिप)" },
+    { id: 3, document: "मुलाच्या पालकांचा कार्यालयाचा पत्ता" },
+    { id: 4, document: "पालक काय काम करतात याची तपशीलवार माहिती" },
+    { id: 5, document: "लाभार्थीच्या कुटुंबाचा तसेच त्याच्या/तिच्या घराचा रंगीत फोटो" },
+    { id: 6, document: "लाभार्थीच्या पालकाचे आधार कार्ड" },
+    { id: 7, document: "पालकांच्या महाराष्ट्रात १५ वर्षांच्या वास्तव्याचा पुरावा" },
+    { id: 8, document: "राष्ट्रीयीकृत बँकेत बचत खाते असणे आवश्यक आहे" },
+    { id: 9, document: "पासपोर्ट आकाराचा फोटो" },
+    { id: 10, document: "मुलाचे जन्म प्रमाणपत्र" },
+    { id: 11, document: "लाभार्थीच्या पालकांचे मृत्यू प्रमाणपत्र" }
+],
+
+// Updated content2 with IDs
+content2: [
+    { id: 1, document: "आधार कार्ड" },
+    { id: 2, document: "पत्ता पुरावा" },
+    { id: 3, document: "वय प्रमाणपत्र" },
+    { id: 4, document: "ड्रायव्हरचा परवाना" },
+    { id: 5, document: "शैक्षणिक पात्रता प्रमाणपत्र" },
+    { id: 6, document: "मोबाईल नंबर" },
+    { id: 7, document: "पासपोर्ट फोटो" },
+    { id: 8, document: "बँक खाते पासबुक" }
+],
+
+// Updated content3 with IDs
+content3: [
+    { id: 1, document: "आधार कार्ड" },
+    { id: 2, document: "पत्ता पुरावा" },
+    { id: 3, document: "ईमेल" },
+    { id: 4, document: "जन्मतारीख" },
+    { id: 5, document: "जिल्हा" },
+    { id: 6, document: "पिनकोड" },
+    { id: 7, document: "राज्याचा अधिवास प्रमाणपत्र किंवा राज्याचा जन्म प्रमाणपत्र" },
+    { id: 8, document: "उत्पन्न पुरावा किंवा पिवळा किंवा केशरी रेशन कार्ड" },
+    { id: 9, document: "शैक्षणिक पात्रता प्रमाणपत्र" },
+    { id: 10, document: "मोबाईल नंबर" },
+    { id: 11, document: "योजनेच्या अटी व शर्तींचे पालन करण्याचे वचन" },
+    { id: 12, document: "पासपोर्ट आकाराचा फोटो" },
+    { id: 13, document: "महिला अर्जदाराने अर्ज भरताना प्रत्यक्ष उपस्थित राहणे आवश्यक आहे" },
+    { id: 14, document: "मुख्यमंत्री माझी लाडकी बहिण योजनेचा अर्ज फॉर्म" },
+    { id: 15, document: "योजनेच्या अटी व शर्तींचे पालन करण्याचे वचन" }
+],
+
+// Updated content4 with IDs
+content4: [
+    { id: 1, document: "अर्जदाराचा जन्म प्रमाणपत्र" },
+    { id: 2, document: "कुटुंबाचे वार्षिक उत्पन्न प्रमाणपत्र (एक लाखाच्या आतील असावे) तहसीलदार / सक्षम प्राधिकरणाकडून" },
+    { id: 3, document: "अर्जदाराच्या आधार कार्डाची छायाप्रत (पहिल्या मुलीसाठी हे पर्यायी आहे)" },
+    { id: 4, document: "पालकांच्या आधार कार्डाची छायाप्रत" },
+    { id: 5, document: "बँक पासबुकच्या पहिल्या पानाची छायाप्रत" },
+    { id: 6, document: "रेशन कार्ड (पिंक किंवा पिवळ्या रेशन कार्डाची छायाप्रत)" },
+    { id: 7, document: "मतदार ओळखपत्राची छायाप्रत (अर्जदार १८ वर्षांचा असल्यास, नाव मतदार यादीत असावे)" },
+    { id: 8, document: "शाळेचे प्रमाणपत्र (बोनाफाईड) जर अर्जदार सध्या शिक्षण घेत असतील" },
+    { id: 9, document: "कुटुंब नियोजन ऑपरेशन प्रमाणपत्र (जर अर्ज दुसऱ्या किंवा नंतरच्या मुलीसाठी असेल तर हे प्रमाणपत्र अनिवार्य आहे)" },
+    { id: 10, document: "अंतिम लाभार्थीचे स्वघोषणापत्र" }
+],
+
+// Updated content5 with IDs
+content5: [
+    { id: 1, document: "अर्जाचा फॉर्म" },
+    { id: 2, document: "रहिवास प्रमाणपत्र" },
+    { id: 3, document: "वयाचा पुरावा" },
+    { id: 4, document: "उत्पन्न प्रमाणपत्र" },
+    { id: 5, document: "रेशन कार्ड" },
+    { id: 6, document: "पासपोर्ट आकाराचा फोटो" }
+],
+
+// Updated content6 with IDs
+content6: [
+    { id: 1, document: "लाभार्थी मुलीचे पालक महाराष्ट्राचे कायमचे रहिवासी असणे आवश्यक आहे, पालकाचे अधिकृत राहिवासी प्रमाणपत्र" },
+    { id: 2, document: "मुलींचे जन्म नोंदणी प्रमाणपत्र" },
+    { id: 3, document: "लाभार्थी कुटुंबाने योजनेसाठी अर्ज करतेवेळी एका मुलीनंतर कुटुंबनियोजन शस्त्रक्रिया केल्याचे प्रमाणपत्र" },
+    { id: 4, document: "योजनेसाठी अर्ज कारणाना लाभार्थी कुटुंबाने दोन मुलींच्या नंतर कुटुंबनियोजन शस्त्रक्रिया केल्याचे वैद्यकीय अधिकाऱ्याचे प्रमाणपत्र" },
+    { id: 5, document: "अर्जदाराचे आधार कार्ड" },
+    { id: 6, document: "BPL श्रेणी रेशनकार्ड" },
+    { id: 7, document: "मिळकत प्रमाणपत्र" },
+    { id: 8, document: "अर्जदाराचे मोबाइल नंबर" },
+    { id: 9, document: "मुलीचे व मातेचे बँक पासबुक" },
+    { id: 10, document: "पासपोर्ट साईज फोटो" }
+],
+
+// Updated content7 with IDs
+ content7: [
+    { id: 1, document: "अर्ज फॉर्म" },
+    { id: 2, document: "निवास प्रमाणपत्र" },
+    { id: 3, document: "वयाचा पुरावा" },
+    { id: 4, document: "उत्पन्न प्रमाणपत्र" },
+    { id: 5, document: "रेशन कार्ड" },
+    { id: 6, document: "पासपोर्ट आकाराचा फोटो" }
+],
+
+// Updated content8 with IDs
+ content8: [
+    { id: 1, document: "या योजनेच्या अंतर्गत सरकारी नोकरी करणारे नागरिक किंवा आयकर भरणारे शेतकरी या योजनेचा लाभ मिळवू शकत नाही." },
+    { id: 2, document: "या योजनेच्या अंतर्गत राज्यातील अल्पभूधारक किंवा अत्यल्पभूधारक शेतकऱ्यांना या योजनेचा लाभ देण्यात येणार आहे." },
+    { id: 3, document: "या योजनेच्या अंतर्गत राज्यातील ऊस आणि फळबागांची शेती करणारे व इतर पारंपारिक शेती करणाऱ्या शेतकऱ्यांना सुद्धा या योजनेत समाविष्ट करण्यात आले आहे." },
+    { id: 4, document: "बँक खात्यावर फक्त लाभार्थींची सही किंवा अंगठ्याचा शिक्का असणे आवश्यक आहे." },
+    { id: 5, document: "लाभार्थ्यांचे आधार कार्ड आवश्यक आहे." },
+    { id: 6, document: "अर्जदाराचे अधिवास प्रमाणपत्र" },
+    { id: 7, document: "अर्जदाराचा मोबाईल नंबर आवश्यक आहे." },
+    { id: 8, document: "पासपोर्ट आकाराचा फोटो" },
+    { id: 9, document: "लाभार्थ्याचे खाजगी बँक खाते (आधार क्रमांक असलेले)" },
+    { id: 10, document: "आवश्यकतेनुसार आधार कार्डाची छायाप्रत" }
+],
+
+// Updated content9 with IDs
+ content9: [
+    { id: 1, document: "सदस्य नोंदणी विहित नमुन्यातील अर्ज आणि त्यावर तलाठी यांची स्वाक्षरी" },
+    { id: 2, document: "तलाठी यांचे कडील 7/12 उतारा" },
+    { id: 3, document: "राष्ट्रीयकृत बँकेच्या पासबुकाची झेरॉक्स" },
+    { id: 4, document: "शिष्यवृत्ती विहित नमुन्यातील अर्ज आणि त्यावर मुख्याध्यापक यांची सही" },
+    { id: 5, document: "अर्जदाराचे आधार कार्ड" },
+    { id: 6, document: "सरकारी खात्याने दिलेले ओळखपत्र" },
+    { id: 7, document: "शिधापत्रिका" },
+    { id: 8, document: "जन्म प्रमाणपत्र" },
+    { id: 9, document: "शाळेचे प्रमाणपत्र पुरावा" },
+    { id: 10, document: "मतदार आय डी" },
+    { id: 11, document: "मोबाइल नंबर" },
+    { id: 12, document: "पासपोर्ट आकाराचा फोटो" }
+],
+
+// Updated content10 with IDs
+ content10: [
+    { id: 1, document: "आधार कार्ड" },
+    { id: 2, document: "पत्ता पुरावा" },
+    { id: 3, document: "वय प्रमाणपत्र" },
+    { id: 4, document: "ड्रायव्हरचा परवाना" },
+    { id: 5, document: "शैक्षणिक पात्रता प्रमाणपत्र" },
+    { id: 6, document: "मोबाईल नंबर" },
+    { id: 7, document: "पासपोर्ट फोटो" },
+    { id: 8, document: "बँक खाते पासबुक" }
+],
+
+// Updated content11 with IDs
+ content11: [
+    { id: 1, document: "पॅन कार्ड" },
+    { id: 2, document: "मतदार ओळखपत्र" },
+    { id: 3, document: "ड्रायव्हिंग लायसन्स" },
+    { id: 4, document: "शाळा / कॉलेज आयडी" },
+    { id: 5, document: "पासपोर्ट" },
+    { id: 6, document: "स्वातंत्र्यसैनिक ओळखपत्र" },
+    { id: 7, document: "RGJAY / MJPJAY चे हेल्थ कार्ड" },
+    { id: 8, document: "अपंग प्रमाणपत्र" },
+    { id: 9, document: "फोटोसह राष्ट्रीय बँकचे पासबुक" },
+    { id: 10, document: "जेष्ठ नागरिक केंद्र सरकार किंवा राज्य सरकारने जारी केलेले कार्ड" },
+    { id: 11, document: "सैनिक बोर्डाने जारी केलेले संरक्षण माजी सैनिक कार्ड" },
+    { id: 12, document: "सागरी मत्स्यपालन ओळखपत्र ( महाराष्ट्र सरकारच्या कृषी मंत्रालय / मत्स्यव्यवसाय विभागाव्दारे जारी केलेले)" },
+    { id: 13, document: "महाराष्ट्र सरकारच्या / भारत सरकारने जारी केलेला कोणताही फोटो आयडी पुरावा" }
+],
+
+// Updated content12 with IDs
+ content12: [
+    { id: 1, document: "उद्योजकाकडे कार्यरत असलेल्या एकूण तांत्रिक मनुष्यबळाची सविस्तर माहिती." },
+    { id: 2, document: "उद्योजकाने प्रकल्प उभारणीसाठी कोणत्या योजनेतून अर्थसहाय्य घेतले आहे या बाबतची माहिती." },
+    { id: 3, document: "प्रशिक्षित करावयाच्या तांत्रिक कर्मचारी / अधिकारी यांच्या शैक्षणिक अर्हतेबाबतचा तपशील व कागदपत्रे." },
+    { id: 4, document: "प्रशिक्षित करावयाच्या तांत्रिक कर्मचारी / अधिकारी यांचे हमीपत्र." }
+],
+
+// Updated content13 with IDs
+ content13: [
+    { id: 1, document: "महाराष्ट्र राज्याचा रहिवासी दाखला" },
+    { id: 2, document: "अर्जदाराचा मोबाईल क्रमांक" },
+    { id: 3, document: "पासपोर्ट आकाराचा फोटो" },
+    { id: 4, document: "अर्जदाराचे वय कमीत कमी 14 वर्ष पूर्ण असावे" },
+    { id: 5, document: "अर्जदाराचे आधार कार्ड" },
+    { id: 6, document: "शैक्षणिक पात्रतेसाठी गुणपत्रिका" },
+    { id: 7, document: "असल्यास कौशल्य प्रमाणपत्र" },
+    { id: 8, document: "अर्जदार हा महाराष्ट्र राज्याचा रहिवासी असावा" },
+    { id: 9, document: "नगरपरिषद किंवा सरपंचाने दिलेले प्रमाणपत्र" }
+],
+
+// content14 with IDs
+ content14: [
+    { id: 1, document: "अर्जदाराचे आधार कार्ड" },
+    { id: 2, document: "शेतीचे कागदपत्र" },
+    { id: 3, document: "मूळ निवासाचे प्रमाणपत्र" },
+    { id: 4, document: "बँक पासबुक" },
+    { id: 5, document: "मोबाईल नंबर" },
+    { id: 6, document: "ओळख पत्र" },
+    { id: 7, document: "पासपोर्ट साईज फोटो" },
+    { id: 8, document: "7 / 12 उतारा" }
+],
+
+// content15 with IDs
+ content15: [
+    { id: 1, document: "अर्जदाराचा 7/12 आणि 8A उतारा" },
+    { id: 2, document: "अर्जदार अनुसूचित जाती किंवा अनुसूचित जमाती प्रवर्गातील असल्यास पुरावा" },
+    { id: 3, document: "अर्जदार अक्षम असल्यास प्रमाणपत्र" },
+    { id: 4, document: "माती आरोग्य पत्रिका" },
+    { id: 5, document: "संयुक्त खातेदारांच्या बाबतीत सर्व खातेदारांचे संमती पत्र (बाग लागवडीसाठी लागू)" },
+    { id: 6, document: "जमीन कुळ कायद्यांतर्गत येत असल्यास कुळाचे संमतीपत्र (बागांच्या लागवडीसाठी लागू)" }
+],
+
+// content16 with IDs
+ content16: [
+    { id: 1, document: "पात्र अर्जदार हा महाराष्ट्र राज्याचा कायमचा रहिवासी असणे आवश्यक आहे तसे अधिकृत प्रमाणपत्र सादर करणे आवश्यक आहे." },
+    { id: 2, document: "अर्जदार विद्यार्थ्याचे पालक अल्पभूधारक शेतकरी किंवा नोंदणीकृत कामगार असेल अशा विद्यार्थ्यांनी अर्ज करतांना कामगार नोंदणी प्रमाणपत्र आणि अल्पभूधारक प्रमाणपत्र सादर करणे आवश्यक राहील." },
+    { id: 3, document: "या योजनेंतर्गत विद्यार्थ्यांनी अर्ज करतांना कुटुंबाच्या एकूण वार्षिक उत्पन्नाचा दाखला, सबंधित तहसीलदार अथवा सक्षम अधिकाऱ्याने दिलेले उत्पन्नाचे प्रमाणपत्र सादर करणे आवश्यक आहे." },
+    { id: 4, document: "ज्या विद्यार्थ्यांनी CAP प्रणालीतून अभ्यासक्रमासाठी प्रवेश घेतला असेल त्या विद्यार्थ्यांनी CAP सबंधित कागदपत्र अर्ज करतांना सादर करणे आवश्यक राहील." },
+    { id: 5, document: "या योजनेंतर्गत प्रत्येक घरातील दोन विद्यार्थी मुले या वसतिगृह निर्वाह अनुदानास पात्र आहे तसे प्रमाणपत्र सादर करणे आवश्यक आहे." },
+    { id: 6, document: "अर्जदार विद्यार्थ्यांना खाजगी वसतिगृहत राहत असल्यास किंवा खाजगी मालकीच्या घरात भाड्याने राहत असल्यास तसे प्रमाणपत्र सादर करणे आवश्यक राहील." },
+    { id: 7, document: "गॅप असल्यास गॅप सबंधित कागदपत्र सादर करावे." }
+],
+
+// content17 with IDs
+ content17: [
+    { id: 1, document: "7/12 चा उतारा, मालमत्ता नोंदपत्र, ग्रामपंचायतीच्या मालमत्ता नोंदवहीत असलेला उतारा यापैकी काहीही" },
+    { id: 2, document: "घरपट्टी, पाणीपट्टी, विद्युत बिल या कागदपत्रांपैकी एक" },
+    { id: 3, document: "सक्षम प्राधिकाऱ्याने दिलेले अधिकृत जातीचे प्रमाणपत्र" },
+    { id: 4, document: "सक्षम प्राधिकाऱ्यांकडून प्राप्त केलेला उत्पन्नाचा दाखला" },
+    { id: 5, document: "मतदार यादीतील नावाचा उतारा" },
+    { id: 6, document: "निवडणूक मतदार ओळखपत्र" },
+    { id: 7, document: "रेशन कार्ड" },
+    { id: 8, document: "सरपंच / तलाठ्याचा दाखला" },
+    { id: 9, document: "महानगरपालिका / नगरपालिका मधील मालमत्ता कर भरल्याच्या पावतीची प्रत" }
+],
+
+// content18 with IDs
+ content18: [
+    { id: 1, document: "जमिनीचा 7/12 उतारा" },
+    { id: 2, document: "जातीचे प्रमाणपत्र" },
+    { id: 3, document: "आत्महत्याग्रस्त कुटुंबाच्या वारसाचा दाखला" },
+    { id: 4, document: "दारिद्र्य रेषेखाली असल्याचा दाखला" },
+    { id: 5, document: "आधारकार्ड" },
+    { id: 6, document: "८ – अ प्रमाणपत्र" },
+    { id: 7, document: "स्वतःच्या स्वाक्षरी सहित भरलेला अर्ज" }
+],
+
+// content19 with IDs
+ content19: [
+    { id: 1, document: "अर्जदाराचा मोबाइल क्रमांक" },
+    { id: 2, document: "उमेदवाराचे आधार कार्ड" },
+    { id: 3, document: "उमेदवाराच्या घराचे मालकी हक्क कागदपत्रे" },
+    { id: 4, document: "वर्तमान विजेचे बिल" },
+    { id: 5, document: "अर्जदार महाराष्ट्र राज्याचा 15 वर्षा पासून रहिवासी असणे आवश्यक आहे" },
+    { id: 6, document: "पासपोर्ट साईझ फोटो" },
+    { id: 7, document: "उमेदवाराच्या कुटुंबाचा उत्पन्न दाखला" }
+],
+
+// content20 with IDs
+ content20: [
+    { id: 1, document: "मुलीचे जन्म प्रमाणपत्र: पालकांनी किंवा कायदेशीर पालकांनी संबंधित मुलीच्या जन्माचा पुरावा सादर करणे आवश्यक आहे. हे जन्म प्रमाणपत्र मुलीचा जन्म झालेल्या रुग्णालयातून किंवा सरकारी एजन्सीमार्फत मिळू शकते." },
+    { id: 2, document: "पालक किंवा कायदेशीर पालकांचा पत्ता पुरावा: मुलीसाठी हे खाते उघडू इच्छिणाऱ्या पालकांनी खाते उघडण्यासाठी त्यांच्या वास्तव्याचा पुरावा सादर करणे आवश्यक आहे. हा पुरावा खालीलप्रमाणे असू शकतो:" },
+    { id: 3, document: "पासपोर्ट" },
+    { id: 4, document: "ड्रायव्हिंग लायसन्स" },
+    { id: 5, document: "रेशन कार्ड" },
+    { id: 6, document: "वीज बिल / टेलिफोन बिल" },
+    { id: 7, document: "आधार कार्ड" }
+]
+
+      };
+
+      $(document).ready(function () {
+        $('button[data-target="#myModal"]').click(function () {
+          const contentId = $(this).data("content");
+          const data = tableData[contentId];
+          let tableHtml = `
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>अनु क्रं.</th>
+                                <th>कागतपत्राचे  नाव </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+          data.forEach((item) => {
+            tableHtml += `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.document}</td>
+                        </tr>
+                    `;
+          });
+
+          tableHtml += `
+                        </tbody>
+                    </table>
+                `;
+
+          $("#modal-body-content").html(tableHtml);
+        });
+      });
+    </script>
+  </body>
+</html>

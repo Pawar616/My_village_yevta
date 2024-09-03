@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Data</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card strong {
+            /* display: block; */
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .card span {
+            font-size: 15px;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .center {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card-header bg-primary text-white text-center position-relative">
+          <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+          <h4>लाभार्थीयांची  यादी</h4>
+          <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+      </div>
+        <div class="center">
+            <button id="showDataBtn" class="btn btn-primary mt-3" onclick="fetchData()">सर्व योजना दाखवा</button>
+            <div id="loading" class="mt-3" style="display: none;">
+                <div class="spinner"></div>
+                <div class="message mt-2">Please wait...</div>
+            </div>
+        </div>
+        <div id="cards-container" class="mt-4"></div>
+    </div>
+    <footer>
+        <p>&copy; Digispect Technology-2024.</p>
+    </footer>
+
+    <script>
+        async function fetchData() {
+            try {
+                const button = document.getElementById("showDataBtn");
+                const loading = document.getElementById("loading");
+
+                button.style.display = "none";
+                loading.style.display = "block";
+
+                const response = await fetch("https://script.google.com/macros/s/AKfycbyAEO5XsjFRuIqH2wVr_ex-i8zBDvzjhSSUOP9V2tbNffJ7ys-gjNC4d2SpFwiE-OANvg/exec");
+                const data = await response.json();
+
+                const container = document.getElementById("cards-container");
+                container.innerHTML = ""; // Clear existing cards
+
+                data.slice(1).forEach((item) => {
+                    const card = document.createElement("div");
+                    card.className = "card";
+
+                    const formattedDate = formatDate(item.date);
+                    card.innerHTML = `
+                       <p> <strong>नाव:</strong> <span>${item.work}</span> </p>
+                       <p> <strong>योजना:</strong> <span>${item.scheme}</span> </p>
+                       <p> <strong>निधी:</strong> <span>${item.amt}</span> </p>
+                       <p> <strong>दिनांक:</strong> <span>${formattedDate}</span> </p>
+                    `;
+
+                    container.appendChild(card);
+                });
+
+                loading.style.display = "none";
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                loading.style.display = "none";
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, "0");
+            const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        window.onload = fetchData;
+    </script>
+</body>
+</html>

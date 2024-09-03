@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirement Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .header i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 24px;
+        }
+
+        .header h4 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            font-weight: bold;
+            padding: 15px 0;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="card-header bg-primary mb-2 text-white text-center position-relative">
+            <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h4>Add Requirement</h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+
+        <!-- Form Section -->
+        <form id="req_form">
+            <div class="form-group">
+                <label for="jobRole">Job Role</label>
+                <input type="text" class="form-control" id="jobRole" placeholder="Enter Job Role">
+            </div>
+
+            <div class="form-group">
+                <label for="qulification">Qualification</label>
+                <input type="text" class="form-control" id="qulification" placeholder="Enter Qualification">
+            </div>
+
+            <div class="form-group">
+                <label for="place">Job Location</label>
+                <input type="text" class="form-control" id="place" placeholder="Enter Place Name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Email">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Last Date</label>
+                <input type="date" class="form-control" id="date">
+            </div>
+
+            <div class="form-group">
+                <label for="jobdisc">Job Description</label>
+                <textarea class="form-control" id="jobdisc" rows="4" placeholder="Enter Job Description"></textarea>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn btn-custom">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('req_form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = {
+                name: document.getElementById('jobRole').value,
+                id: document.getElementById('qulification').value,
+                charge: document.getElementById('place').value,
+                pr: document.getElementById('email').value,
+                date: document.getElementById('date').value,
+                remark: document.getElementById('jobdisc').value
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbzv7_oDyRMMD4r2bWyCfkp8HJDa54RcpVl2BKgPRxnIGbXJCWPIaQYLGn5JYFum7sZnJA/exec', {
+                method: 'POST',
+                contentType: 'application/json',
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert('Form submitted successfully!');
+                document.getElementById('req_form').reset();
+            })
+            .catch(error => {
+                alert('Error submitting form: ' + error);
+            });
+        });
+    </script>
+</body>
+
+</html>
