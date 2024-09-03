@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Certificate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+            font-family: 'Mukta', sans-serif;
+
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        
+        .certificate-container {
+            width: 210mm;
+            border: 1px solid black;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            background-color: lightgrey;
+        }
+        
+        .header img {
+            height: 100px;
+            margin: 20px;
+        }
+        
+        .header h2,
+        .header h3,
+        .header p {
+            margin: 0;
+        }
+        
+        .header div {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .prajwal {
+            margin-left: 300px;
+        }
+        
+        .certify {
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: justify;
+        }
+        
+        .dotted-line {
+            border-bottom: 2px dotted #000;
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        
+        .dotted-line.long {
+            width: calc(60% - 20px);
+            line-height: 2.5;
+        }
+        
+        .dotted-line.short {
+            width: calc(20% - 10px);
+            line-height: 1.6;
+        }
+        
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .form-row label {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .form-row .dotted-line {
+            flex: 2;
+        }
+        
+        footer {
+            display: inline-block;
+            margin-left: 350px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .button-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+        
+        pre {
+            display: block;
+            font-family: monospace;
+            unicode-bidi: isolate;
+            white-space: pre;
+            margin: 8px;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="certificate-container" id="certificate">
+        <span>प्रमाणपत्र क्रमांक/Certificate No.</span>
+        <div class="header">
+            <img src="logo1.png" alt="Logo 1">
+            <div>
+                <h2>महाराष्ट्र शासन</h2>
+                <h3>GOVERNMENT OF MAHARASHTRA</h3>
+                <p>आरोग्य विभाग</p>
+                <p>HEALTH DEPARTMENT</p>
+                <p>प्रमाणपत्र निर्माण करणाऱ्या स्थानिक क्षेत्राचे नाव</p>
+                <pre>....................................</pre>
+                <p>Name of local body issuing certificates</p>
+                <pre>....................................</pre>
+            </div>
+            <img src="logo2.png" alt="Logo 2">
+        </div>
+        <div class="prajwal">
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;मृत्यु प्रमाणपत्र<br>DEATH CERTIFICATE</b>
+        </div>
+        <p class="certify">
+            (जन्म व मृत्यु नोंदणी अधिनियम, १९६९ च्या कलम १२/१७ आणि महाराष्ट्र जन्म व मृत्यु नोंदणी नियम, २००० च्या नियम ८/१३ अन्वये देण्यात येत आहे.)<br> (Issued under section 12/17 of the Registration of Births & Deaths Act, 1969 and Rule 8/13 of the
+            Maharashtra Registration of Births and Deaths Rules, 2000.)<br> ही प्रमाणपत्र आहे की खालील माहिती मूळ जन्म नोंदवहाची आहे जी स्थानिक क्षेत्र / स्थानिक शरीर यासाठी आहे, तालुका / विभाग <span class="dotted-line long"></span> च्या जिल्हा
+            <span class="dotted-line long"></span> च्या <b>महाराष्ट्र राज्याची </b>आहे.<br> This is to certify that the following information has been taken from the original record of birth which is the register for (local area/local body) of tahsil/block
+            <span class="dotted-line long"></span> of District <span class="dotted-line long"></span> of <b>Maharashtra State.</b>
+        </p>
+        <form id="certificateForm">
+            <div class="form-row">
+                <label for="name">मृताचे पूर्ण नाव:</label>
+                <span class="dotted-line" id="certNameMarathi"></span>
+                <label for="sex">&nbsp;&nbsp;&nbsp;लिंग:</label>
+                <span class="dotted-line" id="certSexMarathi"></span>
+            </div>
+            <div class="form-row">
+                <label for="name">Full name of deceased:</label>
+                <span class="dotted-line" id="certName"></span>
+                <label for="sex">&nbsp;&nbsp;&nbsp;Sex:</label>
+                <span class="dotted-line" id="certSex"></span>
+            </div>
+            <div class="form-row">
+                <label for="date-of-death">मृत्यूची तारीख:</label>
+                <span class="dotted-line" id="certDateOfDeathMarathi"></span>
+                <label for="place-of-death">मृत्यूचे ठिकाण:</label>
+                <span class="dotted-line" id="certPlaceOfDeathMarathi"></span>
+            </div>
+            <div class="form-row">
+                <label for="date-of-death">Date of Death:</label>
+                <span class="dotted-line" id="certDateOfDeath"></span>
+                <label for="place-of-death">Place of Death:</label>
+                <span class="dotted-line" id="certPlaceOfDeath"></span>
+            </div>
+            <div class="form-row">
+                <label for="mother-aadhar">आईचे पूर्ण नाव:</label>
+                <span class="dotted-line" id="certMotherNameMarathi"></span>
+                <label for="father-aadhar">वडिलांचे पूर्ण नाव:</label>
+                <span class="dotted-line" id="certFatherNameMarathi"></span>
+            </div>
+            <div class="form-row">
+                <label for="mother-aadhar">Mother Name:</label>
+                <span class="dotted-line" id="certMotherName"></span>
+                <label for="father-aadhar">Father Name:</label>
+                <span class="dotted-line" id="certFatherName"></span>
+            </div>
+            <div class="form-row multi-line">
+                <label for="address-at-death">मृत्यूसमयी मृत व्यक्तीचा पत्ता:</label>
+                <span class="dotted-line" id="certAddressAtDeathMarathi"></span>
+                <label for="permanent-address">मृत व्यक्तीचा कायमचा पत्ता:</label>
+                <span class="dotted-line" id="certPermanentAddressMarathi"></span>
+            </div>
+            <div class="form-row multi-line">
+                <label for="address-at-death">Address of the deceased at the time of death:</label>
+                <span class="dotted-line" id="certAddressAtDeath"></span>
+                <label for="permanent-address">Permanent address of deceased:</label>
+                <span class="dotted-line" id="certPermanentAddress"></span>
+            </div>
+            <div class="form-row">
+                <label for="registration-no">नोंदणी क्रमांक:</label>
+                <span class="dotted-line" id="certRegNumMarathi"></span>
+                <label for="date-of-registration">&nbsp;&nbsp;&nbsp;नोंदणी तारीख:</label>
+                <span class="dotted-line" id="certRegDateMarathi"></span>
+            </div>
+            <div class="form-row">
+                <label for="registration-no">Registration No.:</label>
+                <span class="dotted-line" id="certRegNum"></span>
+                <label for="date-of-registration">&nbsp;&nbsp;&nbsp;Date of Registration:</label>
+                <span class="dotted-line" id="certRegDate"></span>
+            </div>
+            <div class="form-row">
+                <label for="date-of-issue">तारीख:</label>
+                <span class="dotted-line" id="certIssueDateMarathi"></span>
+            </div>
+            <div class="form-row">
+                <label for="date-of-issue">Date:</label>
+                <span class="dotted-line" id="certIssueDate"></span>
+            </div>
+            <div class="form-row">
+                <label for="signature">स्थानिक शरीरातील प्राधिकृत स्वाक्षरीकर्ता:</label>
+                <span class="dotted-line" id="certSignatureMarathi"></span>
+            </div>
+            <div class="form-row">
+                <label for="signature">Signature of the issuing authority:</label>
+                <span class="dotted-line" id="certSignature"></span>
+            </div>
+        </form>
+        <footer>मुद्र / Seal</footer>
+        <div class="button-container">
+            <button onclick="downloadCertificate()">Download PDF</button>
+        </div>
+    </div>
+
+   
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            const data = JSON.parse(params.get("data"));
+
+
+
+            if (data) {
+                document.getElementById("certName").textContent = data[3];
+                document.getElementById("certSex").textContent = data[4];
+                document.getElementById("certDateOfDeath").textContent = data[5];
+                document.getElementById("certPlaceOfDeath").textContent = data[6];
+                document.getElementById("certMotherName").textContent = data[7];
+                document.getElementById("certFatherName").textContent = data[8];
+                document.getElementById("certAddressAtDeath").textContent = data[9];
+                document.getElementById("certPermanentAddress").textContent = data[10];
+                document.getElementById("certRegNum").textContent = data[11];
+                document.getElementById("certRegDate").textContent = data[12];
+                document.getElementById("certIssueDate").textContent = data[13];
+
+                // Populate Marathi fields
+                document.getElementById("certNameMarathi").textContent = data[3]; // Example: replace with translated text
+                document.getElementById("certSexMarathi").textContent = data[4];
+                document.getElementById("certDateOfDeathMarathi").textContent = data[5]; // Example: replace with translated text
+                document.getElementById("certPlaceOfDeathMarathi").textContent = data[6]; // Example: replace with translated text
+                document.getElementById("certMotherNameMarathi").textContent = data[7]; // Example: replace with translated text
+                document.getElementById("certFatherNameMarathi").textContent = data[8]; // Example: replace with translated text
+                document.getElementById("certAddressAtDeathMarathi").textContent = data[9]; // Example: replace with translated text
+                document.getElementById("certPermanentAddressMarathi").textContent = data[10]; // Example: replace with translated text
+                document.getElementById("certRegNumMarathi").textContent = data[11]; // Example: replace with translated text
+                document.getElementById("certRegDateMarathi").textContent = data[12]; // Example: replace with translated text
+                document.getElementById("certIssueDateMarathi").textContent = data[13]; // Example: replace with translated text
+            }
+        });
+
+        function downloadCertificate() {
+            const element = document.getElementById('certificate');
+            html2pdf().from(element).set({
+                margin: [0, 0],
+                filename: 'birth_certificate.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2,
+                    scrollY: 0
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                }
+            }).save();
+        }
+
+        window.onload = populateCertificateData;
+    </script>
+</body>
+
+</html>

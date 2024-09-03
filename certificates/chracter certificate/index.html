@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Mukta', sans-serif;
+        
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #604d3e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #453b2d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card-header bg-primary mb-2 text-white text-center position-relative">
+            <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h4>चारित्र्य प्रमाणपत्र </h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+        <h2 class="text-center mb-4">चारित्र्य आणि पार्श्वभूमी पडताळणीसाठी अर्ज सह वैयक्तिक तपशील फॉर्म</h2>
+
+        <form action="https://script.google.com/macros/s/AKfycbxznyWL0FkeZUa1_7wc9s7VKJZ6HXZ0sRXrWR9_uwkIRHr9LX4Zbkn5GhoHXkvZzFw/exec" method="POST">
+            <div class="form-group">
+                <label for="applicant-name">अर्जदाराचे नाव:</label>
+                <input type="text" id="applicant-name" name="applicant-name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id-name">ओळखपत्राचे नाव:</label>
+                <input type="text" id="id-name" name="id-name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id-no">ओळखपत्र क्रमांक:</label>
+                <input type="text" id="id-no" name="id-no" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aadhar-no">आधार कार्ड क्रमांक:</label>
+                <input type="text" id="aadhar-no" name="aadhar-no" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile-no">मोबाइल क्रमांक:</label>
+                <input type="text" id="mobile-no" name="mobile-no" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email-id">ईमेल आयडी:</label>
+                <input type="email" id="email-id" name="email-id" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="present-address">सध्याचा रहिवासी पत्ता:</label>
+                <textarea id="present-address" name="present-address" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="permanent-address">स्थायी पत्ता:</label>
+                <textarea id="permanent-address" name="permanent-address" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="designation">पदनाम:</label>
+                <input type="text" id="designation" name="designation" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="company">कंपनी:</label>
+                <input type="text" id="company" name="company" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="company-address">कंपनीचा पत्ता:</label>
+                <textarea id="company-address" name="company-address" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="address-1">पत्ता:</label>
+                <input type="text" id="address-1" name="address-1" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="from-1">पासून:</label>
+                <input type="text" id="from-1" name="from-1" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="to-1">पर्यंत:</label>
+                <input type="text" id="to-1" name="to-1" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pincode-1">पिनकोड:</label>
+                <input type="text" id="pincode-1" name="pincode-1" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="joining-date">जॉइनिंग तारीख:</label>
+                <input type="date" id="joining-date" name="joining-date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="identification-mark">दृश्यमान ओळख चिन्ह:</label>
+                <input type="text" id="identification-mark" name="identification-mark" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="arrested">आपण कधी अटक / खटला केला आहे का?</label>
+                <select id="arrested" name="arrested" class="form-control" required>
+                    <option value="no">नाही</option>
+                    <option value="yes">होय</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="politics">आपण कधी राजकारणात सक्रिय होता का?</label>
+                <select id="politics" name="politics" class="form-control" required>
+                    <option value="no">नाही</option>
+                    <option value="yes">होय</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="criminal-offense">आपल्याविरूद्ध कोणता गुन्हा नोंद आहे का?</label>
+                <select id="criminal-offense" name="criminal-offense" class="form-control" required>
+                    <option value="no">नाही</option>
+                    <option value="yes">होय</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="reference-1">संदर्भ १:</label>
+                <textarea id="reference-1" name="reference-1" class="form-control" rows="3" required></textarea>
+                <label for="reference-mobile-1">संदर्भ मोबाइल क्रमांक १:</label>
+                <input type="text" id="reference-mobile-1" name="reference-mobile-1" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reference-2">संदर्भ २:</label>
+                <textarea id="reference-2" name="reference-2" class="form-control" rows="3" required></textarea>
+                <label for="reference-mobile-2">संदर्भ मोबाइल क्रमांक २:</label>
+                <input type="text" id="reference-mobile-2" name="reference-mobile-2" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="place">ठिकाण:</label>
+                <input type="text" id="place" name="place" class="form-control" required>
+                <label for="date">तारीख:</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+
+            <p class="text-center">
+                मी प्रामाणिकपणे सांगतो की मी वर दिलेली माहिती खरी आणि योग्य आहे.
+            </p>
+
+            <button type="submit" class="btn btn-primary btn-block">सबमिट करा</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

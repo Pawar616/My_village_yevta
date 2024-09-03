@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Data</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+<style>
+        body {
+            /* font-family: 'Roboto', sans-serif; */
+            font-family: 'Mukta', sans-serif;
+
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+           
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .data-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            overflow-x: auto;
+        }
+
+        .data-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-box th,
+        .data-box td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .data-box button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .approve {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .reject {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .show-users-btn {
+            padding: 10px 20px;
+        width: 20%;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #data-container {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="card-header bg-primary text-white text-center position-relative">
+            <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h4>थकबाकी नसल्याचे प्रमाणपत्र</h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+    </div>
+    </div>
+    <div class="container ">
+        <div class="text-center">
+        <button class="show-users-btn btn btn-primary" onclick="fetchData()">सर्व अर्ज दर्शवा</button>
+        </div>
+        <div class="container" id="data-container">
+            <!-- User data boxes will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby114-MKkn46w4fZVn0pVGZbPYfx9npUnhgIWGEpXDwSJaRSCxvj3ryytv00vqAMdyi/exec'; // Replace with your Google Apps Script web app URL
+
+        function fetchData() {
+            fetch(scriptURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Success') {
+                        populateDataBoxes(data.data);
+                        document.getElementById('data-container').style.display = 'flex';
+                    } else {
+                        alert('Error fetching data: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error fetching data: ' + error.message);
+                });
+        }
+
+        function populateDataBoxes(data) {
+            const dataContainer = document.getElementById('data-container');
+            dataContainer.innerHTML = '';
+
+            data.slice(1).forEach(row => {
+                let dataBox = document.createElement('div');
+                dataBox.className = 'data-box';
+
+                let table = document.createElement('table');
+                let tableBody = document.createElement('tbody');
+
+                const fields = [
+                    'office', 'taluka', 'district', 'office_en', 'taluka_en', 'district_en', 'serial_number',
+                    'date', 'grampanchayat', 'taluka2', 'district2', 'grampanchayat_en',
+                    'taluka2_en', 'district2_en', 'name', 'name_en', 'aadhar_number', 'aadhar_number_en',
+                    'residence', 'residence_taluka', 'residence_district', 'residence_en',
+                    'residence_taluka_en', 'residence_district_en', 'place', 'place_en'
+                ];
+
+                fields.forEach((field, index) => {
+                    let newRow = tableBody.insertRow();
+                    let labelCell = newRow.insertCell();
+                    labelCell.textContent = field + ':';
+                    let valueCell = newRow.insertCell();
+                    valueCell.textContent = row[index] || 'N/A';
+                });
+
+                table.appendChild(tableBody);
+
+                let approveButton = document.createElement('button');
+                approveButton.className = 'approve';
+                approveButton.textContent = 'Approve';
+                approveButton.onclick = () => handleAction('approve', row);
+
+                let rejectButton = document.createElement('button');
+                rejectButton.className = 'reject';
+                rejectButton.textContent = 'Reject';
+                rejectButton.onclick = () => handleAction('reject', row);
+
+                dataBox.appendChild(table);
+                dataBox.appendChild(approveButton);
+                dataBox.appendChild(rejectButton);
+
+                dataContainer.appendChild(dataBox);
+            });
+        }
+
+        function handleAction(action, data) {
+            if (action === 'approve') {
+                const fields = [
+                    'office', 'taluka', 'district', 'office_en', 'taluka_en', 'district_en', 'serial_number',
+                    'date', 'grampanchayat', 'taluka2', 'district2', 'grampanchayat_en',
+                    'taluka2_en', 'district2_en', 'name', 'name_en', 'aadhar_number', 'aadhar_number_en',
+                    'residence', 'residence_taluka', 'residence_district', 'residence_en',
+                    'residence_taluka_en', 'residence_district_en', 'place', 'place_en'
+                ];
+
+                let queryString = fields.map((field, index) => `${field}=${encodeURIComponent(data[index] || '')}`).join('&');
+
+                window.location.href = `certificate.html?${queryString}`; // Redirect to a URL with the query string
+            } else {
+                alert(`${action.charAt(0).toUpperCase() + action.slice(1)} action triggered for: ${data[15] || 'N/A'}`); // Adjust index if needed
+            }
+        }
+    </script>
+</body>
+
+</html>

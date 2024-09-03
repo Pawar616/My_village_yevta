@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Death Certificate Data</title>
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+            font-family: 'Mukta', sans-serif;
+
+            margin: 18px;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center; /* Center items horizontally */
+        }
+
+        .data-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            overflow-x: auto;
+        }
+
+        .data-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-box th,
+        .data-box td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .data-box button {
+            margin: 5px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px; /* Adjust font size */
+        }
+
+        .approve {
+            background-color: #28a745; /* Green for approve */
+            color: white;
+        }
+
+        .reject {
+            background-color: #dc3545; /* Red for reject */
+            color: white;
+        }
+
+        .show-users-btn {
+            padding: 8px 16px;
+            background-color: #007bff; /* Blue for show button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px; /* Adjust font size */
+            margin-bottom: 20px;
+        }
+
+        .show-users-btn:hover {
+            opacity: 0.9;
+        }
+
+        .card-header {
+            width: 100%;
+        }
+
+        #data-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="card-header bg-primary text-white text-center position-relative">
+            <a class="text-white" href="../../index.html">
+                <i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i>
+            </a>
+            <h4>मृत्यू प्रमाणपत्र</h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+        <button class="show-users-btn" onclick="fetchData()">सर्व अर्ज दर्शवा </button>
+        <div class="container" id="data-container">
+            <!-- User data boxes will be populated here -->
+        </div>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyENgBBuZN0anC_McwDCW4uE0UQUCHQgJ8neKqq7R0MwCNWs8tLj-deF83EAQMrqdI/exec'; // Replace with your Google Apps Script web app URL
+
+        function fetchData() {
+            fetch(scriptURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Success') {
+                        populateDataBoxes(data.data);
+                        document.getElementById('data-container').style.display = 'flex'; // Show data container
+                    } else {
+                        alert('Error fetching data: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error fetching data: ' + error.message);
+                });
+        }
+
+        function populateDataBoxes(data) {
+            const dataContainer = document.getElementById('data-container');
+            dataContainer.innerHTML = ''; // Clear any existing data
+
+            data.slice(1).forEach(row => { // Slice to skip headers if present
+                let dataBox = document.createElement('div');
+                dataBox.className = 'data-box';
+
+                let table = document.createElement('table');
+                let tableBody = document.createElement('tbody');
+
+                const fields = [
+                    'Local Area', 'Tahsil', 'District', 'Deceased Name', 'Sex',
+                    'Date of Death', 'Place of Death', 'Mother Name', 'Father Name',
+                    'Address at Death', 'Permanent Address', 'Registration No.',
+                    'Date of Registration', 'Date of Issue'
+                ];
+
+                fields.forEach((field, index) => {
+                    let newRow = tableBody.insertRow();
+                    let labelCell = newRow.insertCell();
+                    labelCell.textContent = field + ':';
+                    let valueCell = newRow.insertCell();
+                    valueCell.textContent = row[index] || 'N/A'; // Default to 'N/A' if data is missing
+                });
+
+                table.appendChild(tableBody);
+
+                let approveButton = document.createElement('button');
+                approveButton.className = 'approve';
+                approveButton.textContent = 'Approve';
+                approveButton.onclick = () => handleAction('approve', row);
+
+                let rejectButton = document.createElement('button');
+                rejectButton.className = 'reject';
+                rejectButton.textContent = 'Reject';
+                rejectButton.onclick = () => handleAction('reject', row);
+
+                dataBox.appendChild(table);
+                dataBox.appendChild(approveButton);
+                dataBox.appendChild(rejectButton);
+
+                dataContainer.appendChild(dataBox);
+            });
+        }
+
+        function handleAction(action, data) {
+            if (action === 'approve') {
+                const queryString = new URLSearchParams({
+                    data: JSON.stringify(data)
+                }).toString();
+                window.location.href = `certificate.html?${queryString}`;
+            } else {
+                alert(`${action.charAt(0).toUpperCase() + action.slice(1)} action triggered for: ${data[3]}`); // Assuming data[3] is the deceased's name
+            }
+        }
+    </script>
+</body>
+
+</html>

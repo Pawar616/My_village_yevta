@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            /* font-family: 'Roboto', sans-serif; */
+
+            font-family: 'Mukta', sans-serif;
+
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background-color: #604d3e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .data-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            overflow-x: auto;
+        }
+
+        .data-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-box th,
+        .data-box td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .data-box button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .approve {
+            background-color: #28a745;
+        }
+
+        .reject {
+            background-color: #dc3545;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        #data-container {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .data-box table {
+                font-size: 12px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-header bg-primary text-white text-center position-relative">
+        <a class="text-white" href="../../index.html">
+            <i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%)">arrow_back</i>
+        </a>
+        <h4>परितक्त्वा प्रमाणपत्र</h4>
+        <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%)">person</i>
+    </div>
+    
+    <div class="container">
+        <div class="text-center">
+            <button class="show-users-btn btn btn-primary" onclick="fetchData()">सर्व अर्ज दर्शवा</button>
+        </div>
+        <div class="container" id="data-container"></div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyQXpeEEJkKwOfP9iugDo73SFGrgN6uwPLa4IDo13dvCULE9om1XA9PH6oUKL_C6lo/exec'; // Replace with your Google Apps Script URL
+
+        function fetchData() {
+            fetch(scriptURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Success') {
+                        populateDataBoxes(data.data);
+                        document.getElementById('data-container').style.display = 'flex';
+                    } else {
+                        alert('Error fetching data: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error fetching data: ' + error.message);
+                });
+        }
+
+        function populateDataBoxes(data) {
+            const dataContainer = document.getElementById('data-container');
+            dataContainer.innerHTML = '';
+
+            data.slice(1).forEach(row => {
+                let dataBox = document.createElement('div');
+                dataBox.className = 'data-box';
+
+                let table = document.createElement('table');
+                let tableBody = document.createElement('tbody');
+
+                const fields = [
+                    'Certificate Number', 'Date', 'Village Development Officer', 'Taluka', 'District', 'Applicant Name',
+                    'Aadhaar Card Number', 'Gram Panchayat', 'Place'
+                ];
+
+                fields.forEach((field, index) => {
+                    let newRow = tableBody.insertRow();
+                    let labelCell = newRow.insertCell();
+                    labelCell.textContent = field + ':';
+                    let valueCell = newRow.insertCell();
+                    valueCell.textContent = row[index] || 'N/A';
+                });
+
+                table.appendChild(tableBody);
+
+                let approveButton = document.createElement('button');
+                approveButton.className = 'approve';
+                approveButton.textContent = 'Approve';
+                approveButton.onclick = () => handleAction('approve', row);
+
+                let rejectButton = document.createElement('button');
+                rejectButton.className = 'reject';
+                rejectButton.textContent = 'Reject';
+                rejectButton.onclick = () => handleAction('reject', row);
+
+                dataBox.appendChild(table);
+                dataBox.appendChild(approveButton);
+                dataBox.appendChild(rejectButton);
+
+                dataContainer.appendChild(dataBox);
+            });
+        }
+
+        function handleAction(action, data) {
+            if (action === 'approve') {
+                const queryString = new URLSearchParams({
+                    data: JSON.stringify(data)
+                }).toString();
+                window.location.href = `certificate.html?${queryString}`;
+            } else {
+                alert(`${action.charAt(0).toUpperCase() + action.slice(1)} action triggered for: ${data[5]}`);
+            }
+        }
+    </script>
+</body>
+
+</html>

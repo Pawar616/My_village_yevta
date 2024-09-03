@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <title>Niradhar Certificate</title>
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+
+            font-family: 'Mukta', sans-serif;
+
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm;
+            margin: auto;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            position: relative;
+        }
+        
+        .header,
+        .footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .certificate-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        button {
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="certificate">
+        <div class="header">
+            <p>शासन निर्णय क्रमांक : आरटीएस-२०१५/प्रा.क्र.३२/पं.रा-५ दिनांक १४ जुलै २०१५</p>
+        </div>
+
+        <h2 style="text-align: center;">निराधार असल्याचा दाखला</h2>
+        <h2 style="text-align: center;">Certificate of Niradhar</h2>
+
+        <div class="certificate-details">
+            <div>
+                <p>दाखला.क्र. : <span id="cert-no"></span></p>
+                <p>Certificate No. : <span id="cert-no-en"></span></p>
+            </div>
+            <div>
+                <p>दिनांक : <span id="date"></span></p>
+                <p>Date : <span id="date-en"></span></p>
+            </div>
+        </div>
+
+        <p>सरपंच / ग्रामसेवक/ग्रामविकास अधिकारी <span id="officer"></span> ता. <span id="taluka"></span> जि. <span id="district"></span></p>
+        <p>Sarpanch/Gramsevak/Village Development Officer <span id="officer-en"></span> Tal. <span id="taluka-en"></span> Dist. <span id="district-en"></span></p>
+
+        <p>यांजकडून दाखला देण्यात येतो कीश्री./श्रीमती.: <span id="name"></span></p>
+        <p>is issuing the certificate that Mr/Mrs : <span id="name-en"></span></p>
+
+        <p>आधार कार्ड क्रमांक : <span id="aadhar"></span></p>
+        <p>Aadhar Card Number : <span id="aadhar-en"></span></p>
+
+        <p>हे ग्रामपंचायत <span id="grampanchayat"></span> ता. <span id="taluka2"></span> जि. <span id="district2"></span> महाराष्ट्र.</p>
+        <p>Of grampanchayat <span id="grampanchayat-en"></span> Tal. <span id="taluka2-en"></span> Dist. <span id="district2-en"></span> Maharashtra.</p>
+
+        <p>येथील रहिवासी असून स्थानिक चौकशीच्या आधारे निराधार असल्याचा दाखला त्यांचे विनंती अर्जानुसार देण्यात येत आहे.</p>
+        <p>Is a resident and certified that as per the local level enquiry she is Niradhar. Certificate is issued on request of the applicant.</p>
+
+        <div class="signature">
+            <div>
+                <p>सही व शिक्का सिल</p>
+
+                <p>Signature with Stamp</p>
+            </div>
+            <div>
+                <p>ग्रामसेवक/ग्रामविकास अधिकारी</p>
+                <p>Gramsevak/Village Development Officer</p>
+            </div>
+        </div>
+        
+    </div>
+    <div class="text-center mt-5">
+    <button class="btn btn-primary" onclick="generatePDF()">Download PDF</button>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <script>
+        // Get query parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Fill in certificate details
+        document.getElementById('cert-no').textContent = urlParams.get('certificateNumber');
+        document.getElementById('cert-no-en').textContent = urlParams.get('certificateNumber');
+        document.getElementById('date').textContent = urlParams.get('date');
+        document.getElementById('date-en').textContent = urlParams.get('date');
+        document.getElementById('officer').textContent = urlParams.get('officer');
+        document.getElementById('officer-en').textContent = urlParams.get('officer');
+        document.getElementById('taluka').textContent = urlParams.get('taluka');
+        document.getElementById('taluka-en').textContent = urlParams.get('taluka');
+        document.getElementById('district').textContent = urlParams.get('district');
+        document.getElementById('district-en').textContent = urlParams.get('district');
+        document.getElementById('name').textContent = urlParams.get('name');
+        document.getElementById('name-en').textContent = urlParams.get('name');
+        document.getElementById('aadhar').textContent = urlParams.get('aadhar');
+        document.getElementById('aadhar-en').textContent = urlParams.get('aadhar');
+        document.getElementById('grampanchayat').textContent = urlParams.get('grampanchayat');
+        document.getElementById('grampanchayat-en').textContent = urlParams.get('grampanchayat');
+        document.getElementById('taluka2').textContent = urlParams.get('taluka2');
+        document.getElementById('taluka2-en').textContent = urlParams.get('taluka2');
+        document.getElementById('district2').textContent = urlParams.get('district2');
+        document.getElementById('district2-en').textContent = urlParams.get('district2');
+
+        function generatePDF() {
+            const {
+                jsPDF
+            } = window.jspdf;
+            const certificateElement = document.getElementById('certificate');
+
+            html2canvas(certificateElement, {
+                scale: 2
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth * ratio, imgHeight * ratio);
+                pdf.save('niradhar_certificate.pdf');
+            });
+        }
+    </script>
+</body>
+
+</html>

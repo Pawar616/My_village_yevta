@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Mukta', sans-serif;
+
+        }
+
+        .container {
+            padding: 20px;
+            border: 2px solid #604d3e;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #604d3e;
+            font-weight: bold;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px);
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            width: 100px;
+         
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #4b3d31;
+        }
+
+        .btn_link {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="card-header mb-2 bg-primary text-white text-center position-relative">
+            <a class="text-white" href="../../index.html"><i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h4>विधवा असल्याचा दाखला</h4>
+            <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i>
+        </div>
+        <form action="" method="post" name="google-sheet">
+            <label for="office">ग्रामपंचायत कार्यालय :-</label>
+            <input type="text" id="office" name="office">
+
+            <label for="taluka">ता. :-</label>
+            <input type="text" id="taluka" name="taluka">
+
+            <label for="district">जि. :-</label>
+            <input type="text" id="district" name="district">
+
+            <label for="document_no">जा क्रं :-</label>
+            <input type="text" id="document_no" name="document_no">
+
+            <label for="date">दिनांक :-</label>
+            <input type="text" id="date" name="date">
+
+            <label for="officer">सरपंच/ग्रामसेवक/ग्रामसेवक अधिकारी ग्रामपंचायत :-</label>
+            <input type="text" id="officer" name="officer">
+
+            <label for="taluka_officer">ता. :-</label>
+            <input type="text" id="taluka_officer" name="taluka_officer">
+
+            <label for="district_officer">जि. :-</label>
+            <input type="text" id="district_officer" name="district_officer">
+
+            <label for="person">यांच्याकडून दाखला देण्यात येतो की.श्री./श्रीमती :-</label>
+            <input type="text" id="person" name="person">
+
+            <label for="aadhaar">आधारकार्ड क्रं :-</label>
+            <input type="text" id="aadhaar" name="aadhaar">
+
+            <label for="panchayat">हया ग्रामपंचायत:-</label>
+            <input type="text" id="panchayat" name="panchayat">
+
+            <label for="taluka_resident">ता. :-</label>
+            <input type="text" id="taluka_resident" name="taluka_resident">
+
+            <label for="district_resident">जि. :-</label>
+            <input type="text" id="district_resident" name="district_resident">
+
+            <label for="husband_name">येथील रहिवासी असून त्यांचे पती कै.श्री :-</label>
+            <input type="text" id="husband_name" name="husband_name">
+
+            <label for="widow_status">हे मयत असून त्या विधवा आहेत :-</label>
+            <input type="text" id="widow_status" name="widow_status">
+
+            <label for="place">ठिकाण :-</label>
+            <input type="text" id="place" name="place">
+            <div class="text-center">
+            <button class="btn btn-primary" type="submit" id="btn">Save</button> 
+        </div>
+        </form>
+    </div>
+   
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyt_dtIBIPCae7vhvcFQ9Tn_Oa3yLeu7NEvbCDF-8n-vias2wz8WgiwD1gopJ_OhS62gQ/exec';
+        const form = document.forms['google-sheet'];
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <title>Certificate</title>
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+            font-family: 'Mukta', sans-serif;
+
+        }
+        
+        .certificate {
+            max-width: 800px;
+            margin: auto;
+            padding: 2%;
+            border: 2px solid #000;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+        }
+        
+        .details {
+            margin-right: 60px;
+        }
+        
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .signature-stamp {
+            text-align: right;
+        }
+        
+        .user-data {
+            font-weight: bold;
+        }
+        
+       
+    </style>
+</head>
+
+<body>
+    <div class="certificate" id="certificate">
+        <div class="header">
+            <h2> परित्यक्त्या प्रमाणपत्र</h2>
+            <h3>Certificate of Deserted</h3>
+        </div>
+        <div class="details">
+            <div class="row">
+                <span id="cert-no">दाखला.क्र.: <span class="user-data">--------------------</span></span>
+                <span id="date">दिनांक: <span class="user-data">--------------------</span></span>
+            </div>
+            <div class="row">
+                <span id="cert-no-en">Certificate Number: <span class="user-data">--------------------</span></span>
+                <span id="date-en">Date: <span class="user-data">--------------------</span></span>
+            </div>
+            <p id="village-officer">सरपंच/ग्रामसेवक/ग्रामनवकास अधिकारी, <span class="user-data">----------------- ता.--------------- जि.----------------</span></p>
+            <p id="village-officer-en">Sarpanch/Gramsevak/Village Development Officer <span class="user-data">----------- Tal.-----------Dist---------------</span></p>
+            <p id="applicant-name">यांजकडून दाखला देण्यात येतो की, श्रीमती <span class="user-data">-----------------------------------------------------</span></p>
+            <p id="applicant-name-en">is issuing the certificate to Mrs. <span class="user-data">------------------------------------------------------------</span></p>
+            <p id="aadhaar">आधार कार्ड क्रमांक <span class="user-data">--------------------------------</span></p>
+            <p id="aadhaar-en">Adhar Card Number <span class="user-data">--------------------------------</span></p>
+            <p id="residence">हे ग्रामपंचायत <span class="user-data">------------------ ता.---------------------जि.-------------------, महाराष्ट्र येथील रहवासी आहेत.</span></p>
+            <p id="residence-en">is a resident of grampanchayat <span class="user-data">----------------------Tal.--------------Dist.--------------, Maharashtra</span></p>
+            <p>त्या पनरत्यक्त्या असून त्यांचा आजपयंत पुनर्विवाह केलेला नाही.</p>
+            <p>She is deserted and she is not remarried.</p>
+            <p>सदर प्रमाणपत्र अर्जदाराच्या मागणीवरून, प्रतिज्ञापत्र व स्थानिक चौकशी करून देण्यात येत आहे.</p>
+            <p>This certificate is issued on request of the applicant after verifying the affidavit and local level enquiry.</p>
+        </div>
+        <div class="footer">
+            <div>
+                <p id="place">निकाण: <span class="user-data">--------------------</span></p>
+                <p>Place:</p>
+            </div>
+            <div class="signature-stamp">
+                <p>सही व शिक्का&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p>Signature with Stamp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p>ग्रामसेवक/ग्रामनवकास अधिकारी&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p>Gramsevak/Village Development Officer</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class=" my-2 download-btn btn btn-primary" onclick="downloadPDF()">Download PDF</button>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const data = JSON.parse(urlParams.get('data'));
+
+            document.getElementById('cert-no').querySelector('.user-data').textContent = data[0];
+            document.getElementById('date').querySelector('.user-data').textContent = data[1];
+            document.getElementById('cert-no-en').querySelector('.user-data').textContent = data[0];
+            document.getElementById('date-en').querySelector('.user-data').textContent = data[1];
+            document.getElementById('village-officer').querySelector('.user-data').textContent = `${data[2]} ता. ${data[3]} जि. ${data[4]}`;
+            document.getElementById('village-officer-en').querySelector('.user-data').textContent = `${data[2]} Tal. ${data[3]} Dist. ${data[4]}`;
+            document.getElementById('applicant-name').querySelector('.user-data').textContent = data[5];
+            document.getElementById('applicant-name-en').querySelector('.user-data').textContent = data[5];
+            document.getElementById('aadhaar').querySelector('.user-data').textContent = data[6];
+            document.getElementById('aadhaar-en').querySelector('.user-data').textContent = data[6];
+            document.getElementById('residence').querySelector('.user-data').textContent = `${data[7]} ता. ${data[3]} जि. ${data[4]}, महाराष्ट्र`;
+            document.getElementById('residence-en').querySelector('.user-data').textContent = `${data[7]} Tal. ${data[3]} Dist. ${data[4]}, Maharashtra`;
+            document.getElementById('place').querySelector('.user-data').textContent = data[8];
+        });
+
+        function downloadPDF() {
+            const element = document.getElementById('certificate');
+            html2pdf().from(element).set({
+                margin: 0,
+                filename: 'certificate.pdf',
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    orientation: 'portrait',
+                    unit: 'in',
+                    format: 'letter',
+                    compressPDF: true
+                }
+            }).save();
+        }
+    </script>
+</body>
+
+</html>

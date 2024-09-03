@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate of Registration of Marriage</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        /* font-family: Arial, sans-serif; */
+        font-family: 'Mukta', sans-serif;
+
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f9f9f9;
+      }
+
+      .certificate {
+        width: 80%;
+        max-width: 800px;
+        border: 1px solid #000;
+        padding: 20px;
+        background: #fff;
+      }
+
+      .header,
+      .content {
+        text-align: center;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .photo-box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        display: inline-block;
+      }
+
+      .logo {
+        height: 100px;
+      }
+
+      .title-box {
+        flex: 1;
+        padding: 0 10px;
+        text-align: center;
+      }
+
+      .form-group {
+        display: flex;
+        margin: 10px 0;
+      }
+
+      .form-group label {
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      .form-group .input {
+        flex: 2;
+        border-bottom: 2px dotted #000;
+      }
+
+      @media (max-width: 600px) {
+        .header {
+          flex-direction: column;
+        }
+
+        .photo-box {
+          margin-bottom: 10px;
+        }
+
+        .form-group {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .form-group label,
+        .form-group .input {
+          width: 100%;
+        }
+      }
+
+      footer label {
+        align-items: left;
+      }
+
+      footer pre {
+        display: inline-block;
+        font-family: monospace;
+        unicode-bidi: isolate;
+        white-space: pre;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="certificate">
+      <div class="header">
+        <div class="photo-box" id="husband-photo">फोटो</div>
+        <div class="title-box">
+          <img src="logo1.png" alt="Logo" class="logo" />
+          <h1>महाराष्ट्र शासन</h1>
+          <p>
+            (नगर पालिका ठाणे महा पालीका, पं, ६१६/६१८ शिवनेरी, ठाणे ४०० ६०१)<br />
+            फाॅम नं. - FORM E<br />
+            विवाह नोंदणी प्रमाणपत्र<br />
+            CERTIFICATE OF REGISTRATION OF MARRIAGE
+          </p>
+          <p>(विभाग 6(1) आणि नियम 4 पहा)<br />(See Section 6(1) and Rule 4)</p>
+        </div>
+        <div class="photo-box" id="wife-photo">फोटो</div>
+      </div>
+
+      <div class="content">
+        <div class="form-group">
+          <label>पतीचे नाव:</label>
+          <span id="certHusbandName" class="input"></span>
+          <label>पतीचा आधार क्रमांक:</label>
+          <span id="certHusbandUID" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Husband's Name:</label>
+          <span id="certHusbandName" class="input"></span>
+          <label>Husband's Aadhar Number:</label>
+          <span id="certHusbandUID" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>नवरा इथे राहतो:</label>
+          <span id="certHusbandResidingAt" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Husband's residing here:</label>
+          <span id="certHusbandResidingAt" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>पत्नीचे नाव:</label>
+          <span id="certWifeName" class="input"></span>
+          <label>पत्नी आधार क्रमांक:</label>
+          <span id="certWifeUID" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Wife's Name:</label>
+          <span id="certWifeName" class="input"></span>
+          <label>Wife's Aadhar Number:</label>
+          <span id="certWifeUID" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>रोजी समारंभ केला:</label>
+          <span id="certSolemnizedOn" class="input"></span>
+          <label>ठिकाण:</label>
+          <span id="certPlace" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Solemnized on:</label>
+          <span id="certSolemnizedOn" class="input"></span>
+          <label>Place:</label>
+          <span id="certPlace" class="input"></span>
+        </div>
+
+        <p>
+          मॅरेज ब्युरोच्या महाराष्ट्र नियमन आणि विवाह नोंदणी अधिनियम १९९८
+          अंतर्गत ठेवलेल्या विवाहांची नोंदणी
+        </p>
+        <p>
+          Registered of marriages maintained under the maharashtra regulation of
+          marriages bureaus and registrstion of marriages act 1998
+        </p>
+
+        <div class="form-group">
+          <label>खंड क्र. अंतर्गत ठेवलेल्या रजिस्टरचे:</label>
+          <span id="certVolume" class="input"></span>
+          <label>वरील अनुक्रमांक:</label>
+          <span id="certSerialNo" class="input"></span>
+        </div>
+
+        <div class="form-group">
+          <label>of volume:</label>
+          <pre>........................</pre>
+          <label>at serial no:</label>
+          <pre>........................</pre>
+        </div>
+
+        <div class="form-group">
+          <label>दिनांक:</label>
+          <pre>........................</pre>
+          <label>रोजी माझ्याकडून नोंदणी करण्यात आली आहे.</label>
+        </div>
+
+        <div class="form-group">
+          <label>On:</label>
+          <pre>........................</pre>
+          <label>registered by me</label>
+        </div>
+
+        <div class="form-group">
+          <label>ठिकाण / Place:</label>
+        </div>
+        <div class="form-group">
+          <label>दिनांक / Date:</label>
+        </div>
+
+        <footer>
+          <label>शिक्का / Seal:</label>
+          <pre>........................</pre>
+          <label>निबंधक / विवाह नोंदणी Registrar of Marriage</label>
+          <label
+            >ग्रामसेवक / ग्रामविकास अधिकारी / Gramsevak / Village Development
+            officer</label
+          >
+          <pre>........................</pre>
+          <label>ग्रामपंचायत / grampanchayat</label>
+        </footer>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary" id="download-btn ">Download PDF</button>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const data = JSON.parse(decodeURIComponent(urlParams.get("data")));
+
+        const fields = {
+          certHusbandName: data["husband-name"],
+          certHusbandUID: data["husband-aadhar"],
+          certHusbandResidingAt: data["residing-at"],
+          certWifeName: data["wife-name"],
+          certWifeUID: data["wife-aadhar"],
+          certSolemnizedOn: data["solemnized-on"],
+          certPlace: data["place"],
+          certVolume: data["volume"],
+          certSerialNo: data["serial-no"],
+        };
+
+        for (const [id, value] of Object.entries(fields)) {
+          document.getElementById(id).textContent = value || "N/A";
+        }
+
+        document.getElementById("husband-photo").src =
+          data["husband-photo"] || "";
+        document.getElementById("wife-photo").src = data["wife-photo"] || "";
+
+        document
+          .getElementById("download-btn")
+          .addEventListener("click", () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.html(document.querySelector(".certificate"), {
+              callback: function (doc) {
+                doc.save("certificate.pdf");
+              },
+              x: 10,
+              y: 10,
+            });
+          });
+      });
+    </script>
+  </body>
+</html>

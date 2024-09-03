@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birth Certificate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;400;400&display=swap" rel="stylesheet">
+    <style>
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .certificate-container {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 0;
+                border: none;
+                /* Remove border for PDF */
+                overflow: hidden;
+                /* Prevent content overflow */
+            }
+            .button-container {
+                display: none;
+            }
+        }
+        
+        body {
+            /* font-family: Arial, sans-serif; */
+
+            font-family: 'Mukta', sans-serif;
+
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        
+        .certificate-container {
+            width: 210mm;
+            height: 297mm;
+            border: 1px solid black;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            background-color: lightgrey;
+        }
+        
+        .header img {
+            height: 100px;
+            margin: 20px;
+        }
+        
+        .header h2,
+        .header h3,
+        .header p {
+            margin: 0;
+        }
+        
+        .header div {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .prajwal {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .certify {
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: justify;
+        }
+        
+        .dotted-line {
+            border-bottom: 2px dotted #000;
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        
+        .dotted-line.long {
+            width: calc(60% - 20px);
+            line-height: 2.5;
+        }
+        
+        .dotted-line.short {
+            width: calc(20% - 10px);
+            line-height: 1.6;
+        }
+        
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .form-row label {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .form-row .dotted-line {
+            flex: 2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .button-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="certificate-container" id="certificate">
+        <span>प्रमाणपत्र क्रमांक/Certificate No.</span>
+        <div class="header">
+            <img src="logo1.png" alt="Logo 1">
+            <div>
+                <h2>महाराष्ट्र शासन</h2>
+                <h3>GOVERNMENT OF MAHARASHTRA</h3>
+                <p>आरोग्य विभाग</p>
+                <p>HEALTH DEPARTMENT</p>
+                <p>प्रमाणपत्र निर्माण करणाऱ्या स्थानिक क्षेत्राचे नाव</p>
+                <pre>....................................</pre>
+                <p>Name of local body issuing certificates</p>
+                <pre>....................................</pre>
+            </div>
+            <img src="logo2.png" alt="Logo 2">
+        </div>
+
+        <div class="prajwal">
+            <b>जन्म प्रमाणपत्र<br>BIRTH CERTIFICATE</b>
+        </div>
+
+        <p class="certify">
+            (जन्म व मृत्यु नोंदणी अधिनियम, १९६९ च्या कलम १२/१७ आणि महाराष्ट्र जन्म व मृत्यु नोंदणी नियम, २००० च्या नियम ८/१३ अन्वये देण्यात येत आहे.)<br> (Issued under section 12/17 of the Registration of Births & Deaths Act, 1969 and Rule 8/13 of the
+            Maharashtra Registration of Births and Deaths Rules, 2000.)<br> ही प्रमाणपत्र आहे की खालील माहिती मूळ जन्म नोंदवहाची आहे जी स्थानिक क्षेत्र / स्थानिक शरीर यासाठी आहे, तालुका / विभाग <span class="dotted-line long"></span> च्या जिल्हा
+            <span class="dotted-line long"></span> च्या <b>महाराष्ट्र राज्याची </b>आहे.<br> This is to certify that the following information has been taken from the original record of birth which is the register for (local area/local body) of tahsil
+            /block <span class="dotted-line long"></span> of District <span class="dotted-line long"></span> of <b>Maharashtra State.</b>
+        </p>
+
+        <form id="certificateForm">
+            <div class="form-row">
+                <label for="name">नाम:</label>
+                <span class="dotted-line" id="certNameMarathi"></span>
+                <label for="sex">&nbsp;&nbsp;&nbsp;लिंग:</label>
+                <span class="dotted-line" id="certSexMarathi"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="name">Name:</label>
+                <span class="dotted-line" id="certName"></span>
+                <label for="sex">&nbsp;&nbsp;&nbsp;Sex:</label>
+                <span class="dotted-line" id="certSex"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="date-of-birth">जन्म&nbsp;&nbsp;तिथि:</label>
+                <span class="dotted-line" id="certDobMarathi"></span>
+                <label for="place-of-birth">जन्म&nbsp;&nbsp;स्थान:</label>
+                <span class="dotted-line" id="certPlaceOfBirthMarathi"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="date-of-birth">Date&nbsp;of&nbsp;birth:</label>
+                <span class="dotted-line" id="certDob"></span>
+                <label for="place-of-birth">Place&nbsp;of&nbsp;birth:</label>
+                <span class="dotted-line" id="certPlaceOfBirth"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="mother-name">आईचे&nbsp;पूर्ण&nbsp;नाव:</label>
+                <span class="dotted-line" id="certMotherNameMarathi"></span>
+                <label for="father-name">वडिलांचे&nbsp;पूर्ण&nbsp;नाव:</label>
+                <span class="dotted-line" id="certFatherNameMarathi"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="mother-name">Mother&nbsp;Name:</label>
+                <span class="dotted-line" id="certMotherName"></span>
+                <label for="father-name">Father&nbsp;Name:</label>
+                <span class="dotted-line" id="certFatherName"></span>
+            </div>
+
+            <div class="form-row multi-line">
+                <label for="address-at-birth">मुलाच्या जन्माच्या वेळी पालकांचा पत्ता:</label>
+                <span class="dotted-line" id="certAddressAtBirthMarathi"></span>
+                <label for="permanent-address">पालकांचा कायमचा पत्ता:</label>
+                <span class="dotted-line" id="certPermanentAddressMarathi"></span>
+            </div>
+
+            <div class="form-row multi-line">
+                <label for="address-at-birth">Address of parents at the time of birth of the child:</label>
+                <span class="dotted-line" id="certAddressAtBirth"></span>
+                <label for="permanent-address">Permanent Address of Parents:</label>
+                <span class="dotted-line" id="certPermanentAddress"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="registration-no">Registration&nbsp;No.:</label>
+                <span class="dotted-line short" id="certRegistrationNo"></span>
+                <label for="date-of-registration">Date&nbsp;of&nbsp;registration:</label>
+                <span class="dotted-line long" id="certRegistrationDate"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="remarks">शेरा:</label>
+                <span class="dotted-line long" id="certRemarks"></span>
+                <label for="date-of-issue">जारी करने की तिथि/Date of Issue:</label>
+                <span class="dotted-line long" id="certDateOfIssue"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="authority-address">प्राधिकारी का पता/Address of the issuing authority:</label>
+                <span class="dotted-line long" id="certAuthorityAddress"></span>
+            </div>
+
+            <div class="form-row">
+                <label for="signature">हस्ताक्षर/Signature of the issuing authority:</label>
+            </div>
+        </form>
+
+        <footer>मुद्र / Seal</footer>
+
+        <div class="button-container ">
+            <button onclick="downloadCertificate()">Download PDF</button>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        async function translateText(text, targetLang) {
+            try {
+                const response = await axios.post('https://translation.googleapis.com/language/translate/v2', {
+                    q: text,
+                    target: targetLang,
+                    format: 'text'
+                }, {
+                    params: {
+                        key: 'YOUR_GOOGLE_TRANSLATE_API_KEY'
+                    }
+                });
+                return response.data.data.translations[0].translatedText;
+            } catch (error) {
+                console.error('Error translating text:', error);
+                return text; // Return original text if translation fails
+            }
+        }
+
+        async function populateCertificateData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const data = JSON.parse(urlParams.get('data'));
+
+            document.getElementById('certName').textContent = data[3]; // Name of Child
+            document.getElementById('certSex').textContent = data[4]; // Sex
+            document.getElementById('certDob').textContent = data[5]; // Date of Birth
+            document.getElementById('certPlaceOfBirth').textContent = data[6]; // Place of Birth
+            document.getElementById('certMotherName').textContent = data[7]; // Name of Mother
+            document.getElementById('certFatherName').textContent = data[8]; // Name of Father
+            document.getElementById('certAddressAtBirth').textContent = data[9]; // Address of Parents at Birth
+            document.getElementById('certPermanentAddress').textContent = data[10]; // Permanent Address of Parents
+            document.getElementById('certRegistrationNo').textContent = data[11]; // Registration No.
+            document.getElementById('certRegistrationDate').textContent = data[12]; // Date of Registration
+            document.getElementById('certRemarks').textContent = ''; // Remarks, if any
+            document.getElementById('certDateOfIssue').textContent = data[13]; // Date of Issue
+
+            // Translate and set Marathi fields
+            document.getElementById('certNameMarathi').textContent = await translateText(data[3], 'mr');
+            document.getElementById('certSexMarathi').textContent = await translateText(data[4], 'mr');
+            document.getElementById('certDobMarathi').textContent = await translateText(data[5], 'mr');
+            document.getElementById('certPlaceOfBirthMarathi').textContent = await translateText(data[6], 'mr');
+            document.getElementById('certMotherNameMarathi').textContent = await translateText(data[7], 'mr');
+            document.getElementById('certFatherNameMarathi').textContent = await translateText(data[8], 'mr');
+            document.getElementById('certAddressAtBirthMarathi').textContent = await translateText(data[9], 'mr');
+            document.getElementById('certPermanentAddressMarathi').textContent = await translateText(data[10], 'mr');
+            document.getElementById('certRegistrationNoMarathi').textContent = await translateText(data[11], 'mr');
+            document.getElementById('certRegistrationDateMarathi').textContent = await translateText(data[12], 'mr');
+        }
+
+        function downloadCertificate() {
+            const element = document.getElementById('certificate');
+            html2pdf().from(element).set({
+                margin: [0, 0],
+                filename: 'birth_certificate.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2,
+                    scrollY: 0
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                }
+            }).save();
+        }
+
+        window.onload = populateCertificateData;
+    </script>
+</body>
+
+</html>

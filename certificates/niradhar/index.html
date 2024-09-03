@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <title>निराधार प्रमाणपत्र / Certificate of Niradhar</title>
+    <style>
+      body {
+        font-family: 'Mukta', sans-serif;
+
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f9fa; /* Light gray background */
+      }
+
+      .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold; /* Make labels bold */
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .form-group select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+      .btn-submit {
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold; /* Bold text */
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div
+        class="card-header bg-primary text-white text-center position-relative"
+      >
+        <a class="text-white" href="../../index.html"
+          ><i
+            class="material-icons position-absolute"
+            style="left: 10px; top: 50%; transform: translateY(-50%)"
+            >arrow_back</i
+          ></a
+        >
+        <h4>निराधार प्रमाणपत्र</h4>
+        <i
+          class="material-icons position-absolute"
+          style="right: 10px; top: 50%; transform: translateY(-50%)"
+          >person</i
+        >
+      </div>
+      <form id="nirdhar-form">
+        <div class="form-group">
+          <label for="certNo">प्रमाणपत्र क्रमांक / Certificate No.</label>
+          <input type="text" id="certNo" name="certNo" required />
+        </div>
+        <div class="form-group">
+          <label for="date">तारीख / Date</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+        <div class="form-group">
+          <label for="officer">सरपंच/ग्रामसेवक/ग्रामविकास अधिकारी / Sarpanch/Gramsevak/Village Development Officer</label>
+          <input type="text" id="officer" name="officer" required />
+        </div>
+        <div class="form-group">
+          <label for="taluka">तालुका / Taluka</label>
+          <input type="text" id="taluka" name="taluka" required />
+        </div>
+        <div class="form-group">
+          <label for="district">जिल्हा / District</label>
+          <input type="text" id="district" name="district" required />
+        </div>
+        <div class="form-group">
+          <label for="name">नाव / Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="aadhar">आधार कार्ड क्रमांक / Aadhar Card Number</label>
+          <input type="text" id="aadhar" name="aadhar" required />
+        </div>
+        <div class="form-group">
+          <label for="grampanchayat">ग्रामपंचायत / Grampanchayat</label>
+          <input type="text" id="grampanchayat" name="grampanchayat" required />
+        </div>
+        <div class="form-group">
+          <label for="taluka2">तालुका / Taluka</label>
+          <input type="text" id="taluka2" name="taluka2" required />
+        </div>
+        <div class="form-group">
+          <label for="district2">जिल्हा / District</label>
+          <input type="text" id="district2" name="district2" required />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn-submit btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbxwBljTZz_erGlPRdLJXwNC5DbMIExanpjpPMd8rlxosod9h9AjtrzLKRil3_JzDm_w/exec";
+      const form = document.getElementById("nirdhar-form");
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams(formData),
+          });
+          const result = await response.json();
+          if (result.status === "Success") {
+            alert("फॉर्म यशस्वीरित्या सबमिट केला.");
+          } else {
+            alert("फॉर्म सबमिट करताना त्रुटी आली.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("फॉर्म सबमिट करताना त्रुटी आली.");
+        }
+      });
+    </script>
+  </body>
+</html>

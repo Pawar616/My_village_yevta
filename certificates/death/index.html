@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Certificate Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Mukta', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .header i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 24px;
+        }
+
+        .header i.left {
+            left: 10px;
+        }
+
+        .header i.right {
+            right: 10px;
+        }
+
+        .header h4 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <a class="text-white" href="index.html"><i class="material-icons left">arrow_back</i></a>
+            <h4>मृत्यू प्रमाणपत्र फॉर्म</h4>
+            <i class="material-icons right">person</i>
+        </div>
+        <div class="form-container">
+            <form id="deathForm">
+                <label for="localArea">स्थानिक क्षेत्र / Local Area:</label>
+                <input type="text" id="localArea" name="localArea" required>
+
+                <label for="tahsil">तालुका / Tahsil:</label>
+                <input type="text" id="tahsil" name="tahsil" required>
+
+                <label for="district">जिल्हा / District:</label>
+                <input type="text" id="district" name="district" required>
+
+                <label for="deceasedName">मृत व्यक्तीचे नाव / Full Name of Deceased:</label>
+                <input type="text" id="deceasedName" name="deceasedName" required>
+
+                <label for="sex">लिंग / Sex:</label>
+                <input type="text" id="sex" name="sex" required>
+
+                <label for="dateOfDeath">मृत्यूची तारीख / Date of Death:</label>
+                <input type="text" id="dateOfDeath" name="dateOfDeath" required>
+
+                <label for="placeOfDeath">मृत्यू स्थळ / Place of Death:</label>
+                <input type="text" id="placeOfDeath" name="placeOfDeath" required>
+
+                <label for="motherName">आईचे नाव / Full Name of Mother:</label>
+                <input type="text" id="motherName" name="motherName" required>
+
+                <label for="fatherName">वडिलांचे नाव / Full Name of Father/Husband:</label>
+                <input type="text" id="fatherName" name="fatherName" required>
+
+                <label for="addressAtDeath">मृत्यूच्या वेळी पत्ता / Address of the Deceased at the Time of Death:</label>
+                <input type="text" id="addressAtDeath" name="addressAtDeath" required>
+
+                <label for="permanentAddress">मृत व्यक्तीचा कायमचा पत्ता / Permanent Address of the Deceased:</label>
+                <input type="text" id="permanentAddress" name="permanentAddress" required>
+
+                <label for="registrationNo">नोंदणी क्रमांक / Registration No.:</label>
+                <input type="text" id="registrationNo" name="registrationNo" required>
+
+                <label for="dateOfRegistration">नोंदणी तारीख / Date of Registration:</label>
+                <input type="text" id="dateOfRegistration" name="dateOfRegistration" required>
+
+                <label for="dateOfIssue">प्रमाणपत्र दिल्याची तारीख / Date of Issue:</label>
+                <input type="text" id="dateOfIssue" name="dateOfIssue" required>
+
+                <label for="remarks">टिप्पणी (असल्यास) / Remarks (If any):</label>
+                <input type="text" id="remarks" name="remarks">
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyENgBBuZN0anC_McwDCW4uE0UQUCHQgJ8neKqq7R0MwCNWs8tLj-deF83EAQMrqdI/exec'; // Replace with your Google Apps Script web app URL
+        const form = document.getElementById('deathForm');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            fetch(scriptURL, {
+                    method: 'POST',
+                    body: new URLSearchParams(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Success') {
+                        alert('फॉर्म यशस्वीपणे सबमिट केला गेला आहे.');
+                        window.location.href = 'displays.html'; // Redirect after successful submission
+                    } else {
+                        alert('फॉर्म सबमिट करण्यात त्रुटी: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('फॉर्म सबमिट करण्यात त्रुटी: ' + error.message);
+                });
+        });
+    </script>
+</body>
+
+</html>
